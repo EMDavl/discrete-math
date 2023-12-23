@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class ChordalGraph {
-
+// 15 -- 13 если не сдать 
     public static void main(String[] args) {
         List<List<Node>> start = getChordalGraph();
         List<Node> perfectEliminationOrder = lexBFS(start);
@@ -107,6 +107,7 @@ public class ChordalGraph {
         return true;
     }
 
+    // с этим не работало
     private static List<List<Node>> getChordalGraph() {
         Node n1 = new Node(1);
         Node n2 = new Node(2);
@@ -115,16 +116,35 @@ public class ChordalGraph {
         Node n5 = new Node(5);
         Node n6 = new Node(6);
 
-        n1.setNeighbours(n5, n2, n6);
-        n2.setNeighbours(n3, n5, n1, n4);
-        n3.setNeighbours(n2, n4, n5);
-        n4.setNeighbours(n3, n5, n2);
-        n5.setNeighbours(n1, n2, n3, n4);
-        n6.setNeighbours(n1);
+        n1.setNeighbours(n2, n6);
+        n2.setNeighbours(n1, n5, n6);
+        n3.setNeighbours(n4, n5, n6);
+        n4.setNeighbours(n3, n5);
+        n5.setNeighbours(n2, n3, n4, n5);
+        n6.setNeighbours(n1, n2, n3, n5);
 
-        List<List<Node>> start = new ArrayList<>(List.of(new ArrayList<>(List.of(n1, n2, n3, n4, n5, n6))));
+        List<List<Node>> start = new ArrayList<>(List.of(new ArrayList<>(List.of(n6, n5, n3, n2, n4, n1))));
         return start;
     }
+
+//    private static List<List<Node>> getChordalGraph() {
+//        Node n1 = new Node(1);
+//        Node n2 = new Node(2);
+//        Node n3 = new Node(3);
+//        Node n4 = new Node(4);
+//        Node n5 = new Node(5);
+//        Node n6 = new Node(6);
+//
+//        n1.setNeighbours(n5, n2, n6);
+//        n2.setNeighbours(n3, n5, n1, n4);
+//        n3.setNeighbours(n2, n4, n5);
+//        n4.setNeighbours(n3, n5, n2);
+//        n5.setNeighbours(n1, n2, n3, n4);
+//        n6.setNeighbours(n1);
+//
+//        List<List<Node>> start = new ArrayList<>(List.of(new ArrayList<>(List.of(n1, n2, n3, n4, n5, n6))));
+//        return start;
+//    }
 
     private static List<List<Node>> getNonChordalGraph() {
         Node n1 = new Node(1);
@@ -179,7 +199,6 @@ public class ChordalGraph {
                         break;
                     }
                 }
-
             }
         }
         return result;
