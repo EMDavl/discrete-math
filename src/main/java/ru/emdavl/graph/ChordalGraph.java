@@ -120,7 +120,7 @@ public class ChordalGraph {
         n2.setNeighbours(n1, n5, n6);
         n3.setNeighbours(n4, n5, n6);
         n4.setNeighbours(n3, n5);
-        n5.setNeighbours(n2, n3, n4, n5);
+        n5.setNeighbours(n2, n3, n4, n6);
         n6.setNeighbours(n1, n2, n3, n5);
 
         List<List<Node>> start = new ArrayList<>(List.of(new ArrayList<>(List.of(n6, n5, n3, n2, n4, n1))));

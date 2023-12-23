@@ -2,9 +2,7 @@ package ru.emdavl.graph;
 
 import lombok.*;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Data
@@ -13,7 +11,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class Node {
 
-    private List<Node> neighbours;
+    private List<Node> neighbours = new ArrayList<>();
     private final Integer number;
 
 
@@ -27,8 +25,10 @@ public class Node {
 
     public void setNeighbours(Node... neighbours) {
         this.neighbours = Arrays.stream(neighbours)
-                .sorted(Comparator.comparing(Node::getNumber))
+                .sorted(Comparator.comparing(n -> n.getNeighbours().size()))
                 .collect(Collectors.toList());
+
+        Collections.reverse(this.neighbours);
     }
 
     @Override
